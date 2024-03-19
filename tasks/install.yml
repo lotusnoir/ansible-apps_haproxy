@@ -1,18 +1,20 @@
 ---
-- name: set facts config if not provided
+- name: Set facts config if not provided
   ansible.builtin.set_fact:
-    haproxy_scl_package: '{{ haproxy_scl_package|default(__haproxy_scl_package) }}'
-    haproxy_packages: '{{ haproxy_packages|default(__haproxy_packages) }}'
-    haproxy_binary: '{{ haproxy_binary|default(__haproxy_binary) }}'
-    haproxy_config_path: '{{ haproxy_config_path|default(__haproxy_config_path) }}'
-    haproxy_service_name: '{{ haproxy_service_name|default(__haproxy_service_name) }}'
-    haproxy_config_global: '{{ haproxy_config_global|default(__haproxy_config_global) }}'
-    haproxy_config_defaults: '{{ haproxy_config_defaults|default(__haproxy_config_defaults) }}'
+    haproxy_scl_package: '{{ haproxy_scl_package | default(__haproxy_scl_package) }}'
+    haproxy_packages: '{{ haproxy_packages | default(__haproxy_packages) }}'
+    haproxy_binary: '{{ haproxy_binary | default(__haproxy_binary) }}'
+    haproxy_config_path: '{{ haproxy_config_path | default(__haproxy_config_path) }}'
+    haproxy_service_name: '{{ haproxy_service_name | default(__haproxy_service_name) }}'
+    haproxy_config_global: '{{ haproxy_config_global | default(__haproxy_config_global) }}'
+    haproxy_config_defaults: '{{ haproxy_config_defaults | default(__haproxy_config_defaults) }}'
 
-- ansible.builtin.include_tasks: setup-RedHat.yml
+- name: Setup Redhat
+  ansible.builtin.include_tasks: setup-RedHat.yml
   when: ansible_os_family == "RedHat"
 
-- ansible.builtin.include_tasks: setup-Debian.yml
+- name: Setup Debian
+  ansible.builtin.include_tasks: setup-Debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Generate config
@@ -22,7 +24,7 @@
     validate: '{{ haproxy_binary }} -c -V -f  %s'
     backup: '{{ haproxy_backup_config }}'
     mode: 0644
-  notify: reload haproxy
+  notify: Reload haproxy
 
 - name: Start service
   ansible.builtin.service:

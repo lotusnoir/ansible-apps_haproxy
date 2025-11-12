@@ -23,7 +23,7 @@
     dest: '{{ haproxy_config_path }}'
     validate: '{{ haproxy_binary }} -c -V -f  %s'
     backup: '{{ haproxy_backup_config }}'
-    mode: 0644
+    mode: '0644'
   notify: Reload haproxy
 
 - name: Start service

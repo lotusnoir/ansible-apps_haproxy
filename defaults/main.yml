@@ -1,45 +1,33 @@
 ---
-# These variables can be used
-
-# haproxy_scl_package: centos-release-scl-rh
-# haproxy_packages:
-#  - rh-haproxy18-haproxy
-#  - rh-haproxy18-haproxy-syspaths
-
-# haproxy_binary: /opt/rh/rh-haproxy18/root/usr/sbin/haproxy
-# haproxy_config_path: /etc/opt/rh/rh-haproxy18/haproxy/haproxy.cfg
-# haproxy_service_name
-
-# haproxy_config_global: |
-#    Global config is here!
-
-# haproxy_config_defaults: |
-#    config defaults should be here
-
 haproxy_backup_config: true
+
+haproxy_config_global: |
+    maxconn 2000
+    daemon
+    stats socket /tmp/haproxy.sock mode 600 level admin
+haproxy_config_defaults: |
+    mode http
+    timeout connect 5s
+    timeout client  30s
+    timeout server  30s
+    option dontlognull
+    log global
 
 haproxy_frontends:
   - name: main
-    bind: "*:5000"
+    bind: "*:80"
     config: |
-      mode http
-      default_backend             forbidden
-
-  - name: stats
-    bind: 127.0.0.1:10001
-    config: |
-      mode http
-      use_backend stats
+      default_backend dummy
 
 haproxy_backends:
+  - name: dummy
+    config: |
+      http-request return status 200 content-type text/plain string "HAProxy is running\n"
+
+haproxy_listen:
   - name: stats
     config: |
+      bind *:8404
       stats enable
-      stats uri /stats/
-      stats admin if TRUE
-
-  - name: forbidden
-    config: |
-      #    errorfile 503 /usr/share/haproxy/403.http
-      acl true always_true
-      http-request deny if true
+      stats uri /stats
+      stats refresh 10s

@@ -3,8 +3,7 @@
 [![Galaxy Role](https://img.shields.io/badge/galaxy-apps_haproxy-purple?style=flat)](https://galaxy.ansible.com/lotusnoir/apps_haproxy)
 [![Version](https://img.shields.io/github/release/lotusnoir/ansible-apps_haproxy.svg)](https://github.com/lotusnoir/ansible-apps_haproxy/releases/latest)
 [![GitHub repo size](https://img.shields.io/github/repo-size/lotusnoir/ansible-apps_haproxy?color=orange&style=flat)](https://galaxy.ansible.com/lotusnoir/apps_haproxy)
-[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/lotusnoir/apps_haproxy)
-[![Ansible Quality Score](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/lotusnoir/apps_haproxy)
+[![downloads](https://img.shields.io/ansible/role/d/lotusnoir/apps_haproxy)](https://galaxy.ansible.com/lotusnoir/apps_haproxy)
 [![License](https://img.shields.io/badge/license-Apache--2.0-brightgreen?style=flat)](https://opensource.org/licenses/Apache-2.0)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -22,6 +21,7 @@
 ## Description
 
 Deploy [haproxy]() with ansible.
+
 ## Requirements
 
 none

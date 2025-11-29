@@ -17,6 +17,7 @@ variables:
   rules:
     # Exécuter uniquement si un fichier pertinent change
     - changes:
+        - ".gitlab-ci.yml"
         - "defaults/**"
         - "files/**"
         - "handlers/**"
@@ -33,27 +34,27 @@ variables:
 ######################################################
 molecule_debian12:
   <<: *molecule_job_template
-  image: lotusnoir/molecule_play:latest
+  image: lotusnoir/molecule_play:2.18.11
   script:
     - MOLECULE_DISTRIB=debian12 molecule test
 molecule_debian11:
   <<: *molecule_job_template
-  image: lotusnoir/molecule_play:latest
+  image: lotusnoir/molecule_play:2.18.11
   script:
     - MOLECULE_DISTRIB=debian11 molecule test
 molecule_debian13:
   <<: *molecule_job_template
-  image: lotusnoir/molecule_play:latest
+  image: lotusnoir/molecule_play:2.18.11
   script:
     - MOLECULE_DISTRIB=debian13 molecule test
 molecule_ubuntu22:
   <<: *molecule_job_template
-  image: lotusnoir/molecule_play:latest
+  image: lotusnoir/molecule_play:2.18.11
   script:
     - MOLECULE_DISTRIB=ubuntu22 molecule test
 molecule_ubuntu24:
   <<: *molecule_job_template
-  image: lotusnoir/molecule_play:latest
+  image: lotusnoir/molecule_play:2.18.11
   script:
     - MOLECULE_DISTRIB=ubuntu24 molecule test
 
